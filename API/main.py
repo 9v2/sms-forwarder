@@ -12,13 +12,13 @@ async def forward_sms(
     msg: str = Query(..., description="The SMS message content"),
     time: str = Query(..., description="Time when the message was received"),
     in_number: str = Query(..., alias="in-number", description="Sender's phone number"),
-    filter_name: str = Query(..., alias="filter-name", description="Name/identifier of the phone")
+    filter_name: str = Query(..., alias="filter-name", description="Name/identifier of the filter")
 ):
     message = {
-        "message": msg,
-        "time": time,
-        "from": in_number,
-        "device": filter_name
+        "message": msg, # content
+        "time": time, # real time of receiving the message
+        "from": in_number, # sender phone number, or name if its Govermenet.
+        "device": filter_name # its not really important, its a filter name.
     }
     messages.append(message)
     return {"status": "saved", "count": len(messages)}
